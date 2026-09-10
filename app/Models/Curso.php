@@ -11,6 +11,6 @@ class Curso extends Model
 {
     public function alunos(): HasMany
     {
-        return $this->hasMany(Aluno::class, 'curso', 'nome');
+        return $this->hasMany(Aluno::class);
     }
 }

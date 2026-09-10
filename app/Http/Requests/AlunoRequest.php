@@ -15,7 +15,7 @@ class AlunoRequest extends FormRequest
     {
         return [
             'nome' => ['bail', 'required', 'string', 'min:3', 'max:255'],
-            'curso' => ['bail', 'required', 'string', 'min:3', 'max:255'],
+            'curso_id' => ['bail', 'required', 'integer', 'exists:cursos,id'],
         ];
     }
 
@@ -26,10 +26,9 @@ class AlunoRequest extends FormRequest
             'nome.string' => 'O nome do aluno deve ser um texto.',
             'nome.min' => 'O nome do aluno deve ter pelo menos 3 caracteres.',
             'nome.max' => 'O nome do aluno não pode ter mais de 255 caracteres.',
-            'curso.required' => 'O curso é obrigatório.',
-            'curso.string' => 'O curso deve ser um texto.',
-            'curso.min' => 'O curso deve ter pelo menos 3 caracteres.',
-            'curso.max' => 'O curso não pode ter mais de 255 caracteres.',
+            'curso_id.required' => 'O curso é obrigatório.',
+            'curso_id.integer' => 'O curso selecionado é inválido.',
+            'curso_id.exists' => 'O curso selecionado não existe.',
         ];
     }
 }

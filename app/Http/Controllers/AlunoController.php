@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AlunoRequest;
 use App\Models\Aluno;
+use App\Models\Curso;
 
 class AlunoController extends Controller
 {
@@ -16,7 +17,9 @@ class AlunoController extends Controller
 
     public function create()
     {
-        return view('alunos.create');
+        $cursos = Curso::orderBy('nome')->get();
+
+        return view('alunos.create', compact('cursos'));
     }
 
     public function store(AlunoRequest $request)
@@ -33,7 +36,9 @@ class AlunoController extends Controller
 
     public function edit(Aluno $aluno)
     {
-        return view('alunos.edit', compact('aluno'));
+        $cursos = Curso::orderBy('nome')->get();
+
+        return view('alunos.edit', compact('aluno', 'cursos'));
     }
 
     public function update(AlunoRequest $request, Aluno $aluno)

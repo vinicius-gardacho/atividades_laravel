@@ -14,7 +14,7 @@
             @foreach ($alunos as $aluno)
                 <li>
                     <a href="{{ route('alunos.show', $aluno) }}">{{ $aluno->nome }}</a>
-                    - {{ $aluno->curso }}
+                    - {{ $aluno->curso->nome }}
                 </li>
             @endforeach
         </ul>

@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>{{ $aluno->nome }}</h1>
-    <p>Curso: {{ $aluno->curso }}</p>
+    <p>Curso: {{ $aluno->curso->nome }}</p>
 
     <a href="{{ route('alunos.edit', $aluno) }}">Editar</a>
     <a href="{{ route('alunos.index') }}">Voltar</a>
