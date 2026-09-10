@@ -7,12 +7,17 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['nome', 'curso_id'])]
+#[Fillable(['nome', 'curso_id', 'user_id'])]
 class Aluno extends Model
 {
     public function curso(): BelongsTo
     {
         return $this->belongsTo(Curso::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function scopeDoCurso(Builder $query, int $cursoId): void
