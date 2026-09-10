@@ -5,10 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 #[Fillable(['nome', 'curso'])]
 class Aluno extends Model
 {
+    public function cursoRelacionado(): BelongsTo
+    {
+        return $this->belongsTo(Curso::class, 'curso', 'nome');
+    }
+
     public function scopeDoCurso(Builder $query, string $curso): void
     {
         $query->where('curso', $curso);
