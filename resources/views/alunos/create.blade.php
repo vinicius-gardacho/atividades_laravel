@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastrar aluno</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Cadastrar aluno')
+
+@section('content')
     <h1>Cadastrar aluno</h1>
 
     <form method="POST" action="{{ route('alunos.store') }}">
@@ -17,5 +15,4 @@
     </form>
 
     <a href="{{ route('alunos.index') }}">Voltar</a>
-</body>
-</html>
+@endsection
