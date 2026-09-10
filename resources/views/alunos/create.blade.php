@@ -5,6 +5,14 @@
 @section('content')
     <h1>Cadastrar aluno</h1>
 
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $erro)
+                <li>{{ $erro }}</li>
+            @endforeach
+        </ul>
+    @endif
+
     <form method="POST" action="{{ route('alunos.store') }}">
         @csrf
 
