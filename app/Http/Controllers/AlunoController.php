@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AlunoRequest;
 use App\Models\Aluno;
 use App\Models\Curso;
+use Illuminate\Support\Facades\Gate;
 
 class AlunoController extends Controller
 {
@@ -24,18 +25,25 @@ class AlunoController extends Controller
 
     public function store(AlunoRequest $request)
     {
-        $aluno = Aluno::create($request->validated());
+        $aluno = Aluno::create([
+            ...$request->validated(),
+            'user_id' => $request->user()->id,
+        ]);
 
         return redirect()->route('alunos.show', $aluno);
     }
 
     public function show(Aluno $aluno)
     {
+        Gate::authorize('view', $aluno);
+
         return view('alunos.show', compact('aluno'));
     }
 
     public function edit(Aluno $aluno)
     {
+        Gate::authorize('update', $aluno);
+
         $cursos = Curso::orderBy('nome')->get();
 
         return view('alunos.edit', compact('aluno', 'cursos'));
@@ -43,6 +51,8 @@ class AlunoController extends Controller
 
     public function update(AlunoRequest $request, Aluno $aluno)
     {
+        Gate::authorize('update', $aluno);
+
         $aluno->update($request->validated());
 
         return redirect()->route('alunos.show', $aluno);
@@ -50,6 +60,8 @@ class AlunoController extends Controller
 
     public function destroy(Aluno $aluno)
     {
+        Gate::authorize('delete', $aluno);
+
         $aluno->delete();
 
         return redirect()->route('alunos.index');
