@@ -11,6 +11,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/admin', function () {
+    return 'Área administrativa';
+})->middleware(['auth', 'role:admin'])->name('admin');
+
+Route::get('/professor', function () {
+    return 'Área do professor';
+})->middleware(['auth', 'role:user'])->name('professor');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
