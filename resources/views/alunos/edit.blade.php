@@ -1,22 +1,22 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Editar aluno</title>
-</head>
-<body>
-    <h1>Editar aluno {{ $aluno }}</h1>
+@extends('layouts.app')
+
+@section('title', 'Editar aluno')
+
+@section('content')
+    <h1>Editar aluno</h1>
 
     <form method="POST" action="{{ route('alunos.update', $aluno) }}">
         @csrf
         @method('PUT')
 
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+        <input type="text" id="nome" name="nome" value="{{ old('nome', $aluno->nome) }}" required>
+
+        <label for="curso">Curso:</label>
+        <input type="text" id="curso" name="curso" value="{{ old('curso', $aluno->curso) }}" required>
 
         <button type="submit">Atualizar</button>
     </form>
 
     <a href="{{ route('alunos.show', $aluno) }}">Voltar</a>
-</body>
-</html>
+@endsection

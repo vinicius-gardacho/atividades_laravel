@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+#[Fillable(['nome', 'curso'])]
 class Aluno extends Model
 {
     public function scopeDoCurso(Builder $query, string $curso): void

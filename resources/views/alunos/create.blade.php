@@ -9,7 +9,10 @@
         @csrf
 
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+        <input type="text" id="nome" name="nome" value="{{ old('nome') }}" required>
+
+        <label for="curso">Curso:</label>
+        <input type="text" id="curso" name="curso" value="{{ old('curso') }}" required>
 
         <button type="submit">Salvar</button>
     </form>

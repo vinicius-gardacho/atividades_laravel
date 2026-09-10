@@ -7,13 +7,14 @@
 
     <a href="{{ route('alunos.create') }}">Cadastrar aluno</a>
 
-    @if (empty($alunos))
+    @if ($alunos->isEmpty())
         <p>Nenhum aluno cadastrado.</p>
     @else
         <ul>
             @foreach ($alunos as $aluno)
                 <li>
-                    <a href="{{ route('alunos.show', $aluno) }}">Aluno {{ $aluno }}</a>
+                    <a href="{{ route('alunos.show', $aluno) }}">{{ $aluno->nome }}</a>
+                    - {{ $aluno->curso }}
                 </li>
             @endforeach
         </ul>

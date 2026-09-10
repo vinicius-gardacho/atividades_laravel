@@ -2,42 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aluno;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller
 {
     public function index()
     {
-        return 'Lista de alunos';
+        $alunos = Aluno::latest()->get();
+
+        return view('alunos.index', compact('alunos'));
     }
 
     public function create()
     {
-        return 'Formulário de criação de aluno';
+        return view('alunos.create');
     }
 
     public function store(Request $request)
     {
-        return 'Aluno armazenado';
+        $dados = $request->validate([
+            'nome' => ['required', 'string', 'max:255'],
+            'curso' => ['required', 'string', 'max:255'],
+        ]);
+
+        $aluno = Aluno::create($dados);
+
+        return redirect()->route('alunos.show', $aluno);
     }
 
-    public function show(string $id)
+    public function show(Aluno $aluno)
     {
-        return "Aluno: $id";
+        return view('alunos.show', compact('aluno'));
     }
 
-    public function edit(string $id)
+    public function edit(Aluno $aluno)
     {
-        return "Formulário de edição do aluno: $id";
+        return view('alunos.edit', compact('aluno'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, Aluno $aluno)
     {
-        return "Aluno atualizado: $id";
+        $dados = $request->validate([
+            'nome' => ['required', 'string', 'max:255'],
+            'curso' => ['required', 'string', 'max:255'],
+        ]);
+
+        $aluno->update($dados);
+
+        return redirect()->route('alunos.show', $aluno);
     }
 
-    public function destroy(string $id)
+    public function destroy(Aluno $aluno)
     {
-        return "Aluno removido: $id";
+        $aluno->delete();
+
+        return redirect()->route('alunos.index');
     }
 }
