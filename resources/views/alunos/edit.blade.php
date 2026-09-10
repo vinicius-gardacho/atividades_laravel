@@ -5,6 +5,14 @@
 @section('content')
     <h1>Editar aluno</h1>
 
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $erro)
+                <li>{{ $erro }}</li>
+            @endforeach
+        </ul>
+    @endif
+
     <form method="POST" action="{{ route('alunos.update', $aluno) }}">
         @csrf
         @method('PUT')
