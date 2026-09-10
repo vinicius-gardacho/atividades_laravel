@@ -18,6 +18,8 @@ class AlunoController extends Controller
 
     public function create()
     {
+        Gate::authorize('create', Aluno::class);
+
         $cursos = Curso::orderBy('nome')->get();
 
         return view('alunos.create', compact('cursos'));
@@ -25,6 +27,8 @@ class AlunoController extends Controller
 
     public function store(AlunoRequest $request)
     {
+        Gate::authorize('create', Aluno::class);
+
         $aluno = Aluno::create([
             ...$request->validated(),
             'user_id' => $request->user()->id,

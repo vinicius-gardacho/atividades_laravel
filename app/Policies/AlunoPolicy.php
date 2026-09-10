@@ -14,16 +14,21 @@ class AlunoPolicy
 
     public function view(User $user, Aluno $aluno): bool
     {
-        return $user->id === $aluno->user_id;
+        return $user->isProfessor() || $user->id === $aluno->user_id;
+    }
+
+    public function create(User $user): bool
+    {
+        return $user->isAdmin();
     }
 
     public function update(User $user, Aluno $aluno): bool
     {
-        return $user->id === $aluno->user_id;
+        return $user->isProfessor();
     }
 
     public function delete(User $user, Aluno $aluno): bool
     {
-        return $user->id === $aluno->user_id;
+        return false;
     }
 }

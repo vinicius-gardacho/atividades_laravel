@@ -17,7 +17,7 @@ Route::get('/admin', function () {
 
 Route::get('/professor', function () {
     return 'Área do professor';
-})->middleware(['auth', 'role:user'])->name('professor');
+})->middleware(['auth', 'role:professor'])->name('professor');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -28,6 +28,11 @@ class User extends Authenticatable
         return $this->role === 'admin';
     }
 
+    public function isProfessor(): bool
+    {
+        return $this->role === 'professor';
+    }
+
     /**
      * Get the attributes that should be cast.
      *
